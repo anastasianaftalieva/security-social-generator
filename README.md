@@ -25,7 +25,11 @@ ready-to-use draft tuned to both.
 
 ## Screenshots / Demo
 
-_(coming — added once the UI is polished, Day 4)_
+Early version, before UI polish (Day 4):
+
+![Early UI showing a generated LinkedIn post for business executives](screenshots/day1-early-ui.png)
+
+_(updates coming — added once the UI is polished, Day 4)_
 
 ## Running locally
 
