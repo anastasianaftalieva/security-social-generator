@@ -45,6 +45,8 @@ streamlit run app.py
 - [ ] Public deploy (Day 6)
 - [ ] Demo GIF + lessons learned (Day 7)
 
-## Lessons learned
+## Lessons learned (Day 1)
 
-_(added as I go)_
+- **Prompt instructions aren't reliable for hard constraints.** Telling the model "never use an em dash" and "stay under 900 characters" wasn't enough, it violated both repeatedly. The fix was enforcing them in code: stripping em dashes with a deterministic string replace, and adding an automatic "shorten this" follow-up call when the model overshoots the character limit. Lesson: prompting sets intent, code enforces rules.
+- **Testing against real source material surfaces problems placeholder text never would.** The character limit and em-dash issues only showed up once I ran the generator against an actual breaking-news security incident, not a made-up example. Real content is messier and pushes the model toward its default habits.
+- **Verify before you publish.** Before trusting an AI-generated summary of a security incident, I checked the model's output against the original source article.
