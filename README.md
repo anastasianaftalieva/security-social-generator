@@ -1,6 +1,6 @@
-# Security Social Post Generator
+# Social Content Payload
 
-_A small AI tool that turns security news into audience-tuned social content — LinkedIn, X, and executive-summary formats — for security teams and marketers who cover them._
+_A small AI tool that turns security news into audience-tuned social content — LinkedIn, X, and executive-summary formats — for cybersecurity marketers and comms teams._
 
 > 🚧 Work in progress — Day 3 of a 7-day build. See commit history for the progression.
 

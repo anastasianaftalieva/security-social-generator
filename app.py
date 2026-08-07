@@ -11,12 +11,84 @@ from prompts import (
     AUDIENCE_GUIDANCE,
 )
 
-st.set_page_config(page_title="Security Social Post Generator", page_icon="🛡️", layout="wide")
+st.set_page_config(page_title="Social Content Payload", page_icon="🛡️", layout="wide")
 
-st.title("🛡️ Security Social Post Generator")
+# --- Custom styling: dark green sidebar, cream canvas, serif headlines, mono labels ---
+st.markdown(
+    """
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:wght@600;700&display=swap');
+
+    h1, h2, h3 {
+        font-family: 'Source Serif 4', Georgia, serif !important;
+        color: #16241a;
+    }
+
+    /* Sidebar: dark green, light text, mono labels */
+    section[data-testid="stSidebar"] {
+        background-color: #0f2818;
+    }
+    section[data-testid="stSidebar"] label,
+    section[data-testid="stSidebar"] p,
+    section[data-testid="stSidebar"] h1,
+    section[data-testid="stSidebar"] h2,
+    section[data-testid="stSidebar"] h3,
+    section[data-testid="stSidebar"] .stCaption {
+        color: #e9f2e2 !important;
+        font-family: 'JetBrains Mono', monospace !important;
+    }
+    section[data-testid="stSidebar"] textarea {
+        background-color: #16351f !important;
+        color: #e9f2e2 !important;
+        border: 1px solid #3a5a44 !important;
+    }
+    section[data-testid="stSidebar"] div[data-baseweb="select"] > div {
+        background-color: #16351f !important;
+        border: 1px solid #3a5a44 !important;
+        color: #e9f2e2 !important;
+    }
+    section[data-testid="stSidebar"] div[data-baseweb="select"] svg {
+        fill: #e9f2e2 !important;
+    }
+    section[data-testid="stSidebar"] button[kind="primary"] {
+        background-color: #baff3d !important;
+        color: #0f2818 !important;
+        border: none !important;
+        font-family: 'JetBrains Mono', monospace !important;
+        font-weight: 700 !important;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        opacity: 1 !important;
+    }
+    section[data-testid="stSidebar"] button[kind="primary"]:disabled {
+        background-color: #2c4636 !important;
+        color: #a9c4a0 !important;
+        opacity: 1 !important;
+    }
+
+    /* Small uppercase mono badge, used for the output header */
+    .post-badge {
+        display: inline-block;
+        background-color: #baff3d;
+        color: #0f2818;
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 700;
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.3rem 0.7rem;
+        border-radius: 4px;
+        margin-bottom: 0.6rem;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.title("🛡️ Social Content Payload")
 st.caption(
     "Paste a CISA alert, vendor blog post, or product announcement. "
-    "Get back audience-tuned social content for your security team."
+    "Get back audience-tuned social content, ready for you to review and post."
 )
 
 # --- API client setup ---
@@ -92,7 +164,10 @@ if "output" in st.session_state:
     limit = CHAR_LIMITS.get(out_platform)
     char_count = len(output)
 
-    st.subheader(f"{out_platform} · {out_audience}")
+    st.markdown(
+        f'<span class="post-badge">{out_platform} · {out_audience}</span>',
+        unsafe_allow_html=True,
+    )
     st.code(output, language=None, wrap_lines=True)  # built-in copy icon, no separate copy button needed
 
     if limit:
