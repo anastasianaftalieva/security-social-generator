@@ -61,3 +61,8 @@ streamlit run app.py
 
 - **A shared call to action across audiences is a tell that the prompt isn't actually differentiating.** The fix was explicit: ground the takeaway in what that specific audience would do or feel (a priority signal for practitioners, a decision or question for executives, relevance for the general public), not the same instruction restated in simpler words.
 - **Constraint-heavy platforms (X's 280 characters) need explicit protection for the "soft" elements, not just the facts.** When the model has to cut for length, it defaults to trimming the ending first, exactly where the hook and the engagement question live. Adding "keep the ending, cut supporting detail first" to the shorten-prompt logic protects the part of the post most likely to drive replies.
+
+## Lessons learned (Day 4)
+
+- **Streamlit doesn't officially support deep CSS customization, so styling native components takes real trial and error.**
+- **A name with personality changes how a project reads.** Renaming from "Security Social Post Generator" to "Social Content Payload" didn't change any functionality, but it made the project feel like an intentional product instead of a literal description of what the code does.
