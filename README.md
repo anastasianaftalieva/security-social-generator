@@ -2,7 +2,7 @@
 
 _A small AI tool that turns security news into audience-tuned social content — LinkedIn, X, and executive-summary formats — for security teams and marketers who cover them._
 
-> 🚧 Work in progress — Day 1 of a 7-day build. See commit history for the progression.
+> 🚧 Work in progress — Day 3 of a 7-day build. See commit history for the progression.
 
 ## Problem
 
@@ -43,7 +43,7 @@ streamlit run app.py
 
 ## Roadmap
 
-- [ ] Audience-aware tone controls (Day 3)
+- [x] Audience-aware tone controls (Day 3)
 - [ ] UI polish + copy button (Day 4)
 - [ ] Tested against real CISA alerts / vendor posts (Day 5)
 - [ ] Public deploy (Day 6)
