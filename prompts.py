@@ -32,7 +32,16 @@ PLATFORM_GUIDANCE = {
         "The first sentence must be a hook: a surprising fact, a consequence, or a question — "
         "never a restatement of what the source material is (e.g. never start with 'OpenAI "
         "confirmed...' or 'A new report shows...'). If you can cut a sentence without losing "
-        "the core point, cut it."
+        "the core point, cut it.\n\n"
+        "Before you write, decide on ONE takeaway: the single thing you want this exact "
+        "audience to remember or do after reading. Build the whole post around defending or "
+        "explaining that one point. Do not try to cover every fact from the source material. "
+        "A source with five vulnerabilities does not need five vulnerabilities in the post; "
+        "pick the one or two that matter most for this audience and cut the rest, or the post "
+        "reads like a summary instead of a take. If a fact does not serve the one takeaway, "
+        "leave it out even if it seems important. End on that takeaway explicitly, a specific "
+        "next action or a stated implication, not a general reminder to 'stay vigilant' or "
+        "'take this seriously.'"
     ),
     "X": (
         "Write a post for X (Twitter). Maximum 280 characters. Punchy, direct, no fluff. "
