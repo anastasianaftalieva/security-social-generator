@@ -2,7 +2,7 @@
 
 _A small AI tool that turns security news into audience-tuned social content — LinkedIn, X, and executive-summary formats — for cybersecurity marketers and comms teams._
 
-> 🚧 Work in progress — Day 3 of a 7-day build. See commit history for the progression.
+> 🚧 Work in progress — Day 4 of a 7-day build. See commit history for the progression.
 
 ## Problem
 
@@ -25,11 +25,13 @@ ready-to-use draft tuned to both.
 
 ## Screenshots / Demo
 
-Early version, before UI polish (Day 4):
+Before (Day 1, before UI polish):
 
 ![Early UI showing a generated LinkedIn post for business executives](screenshots/day1-early-ui.png)
 
-_(updates coming — added once the UI is polished, Day 4)_
+After (Day 4, full restyle):
+
+![Polished UI with dark green sidebar, cream canvas, and audience-tuned LinkedIn output](screenshots/day4-polished-ui.png)
 
 ## Running locally
 
@@ -44,7 +46,7 @@ streamlit run app.py
 ## Roadmap
 
 - [x] Audience-aware tone controls (Day 3)
-- [ ] UI polish + copy button (Day 4)
+- [x] UI polish + copy button (Day 4)
 - [ ] Tested against real CISA alerts / vendor posts (Day 5)
 - [ ] Public deploy (Day 6)
 - [ ] Demo GIF + lessons learned (Day 7)
