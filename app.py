@@ -11,7 +11,7 @@ from prompts import (
     AUDIENCE_GUIDANCE,
 )
 
-st.set_page_config(page_title="Security Social Post Generator", page_icon="🛡️", layout="centered")
+st.set_page_config(page_title="Security Social Post Generator", page_icon="🛡️", layout="wide")
 
 st.title("🛡️ Security Social Post Generator")
 st.caption(
@@ -30,20 +30,6 @@ if not api_key:
 
 client = anthropic.Anthropic(api_key=api_key) if api_key else None
 
-# --- Inputs ---
-source_text = st.text_area(
-    "Source material",
-    height=200,
-    placeholder="Paste the CISA alert, blog post, or announcement text here...",
-)
-
-col1, col2 = st.columns(2)
-with col1:
-    platform = st.selectbox("Platform", list(PLATFORM_GUIDANCE.keys()))
-with col2:
-    audience = st.selectbox("Audience", list(AUDIENCE_GUIDANCE.keys()))
-
-generate = st.button("Generate", type="primary", disabled=not source_text or not client)
 
 def call_claude(prompt: str) -> str:
     response = client.messages.create(
@@ -53,6 +39,29 @@ def call_claude(prompt: str) -> str:
     )
     return "".join(block.text for block in response.content if block.type == "text")
 
+
+# --- Sidebar: all inputs live here, output gets the main stage ---
+with st.sidebar:
+    st.header("Source material")
+    source_text = st.text_area(
+        "Paste the CISA alert, blog post, or announcement text here",
+        height=220,
+        placeholder="Paste the CISA alert, blog post, or announcement text here...",
+        label_visibility="collapsed",
+    )
+
+    platform = st.selectbox("Platform", list(PLATFORM_GUIDANCE.keys()))
+    audience = st.selectbox("Audience", list(AUDIENCE_GUIDANCE.keys()))
+
+    generate = st.button(
+        "Generate",
+        type="primary",
+        use_container_width=True,
+        disabled=not source_text or not client,
+    )
+
+    if not source_text:
+        st.caption("Paste some source material to enable generation.")
 
 # --- Generation ---
 if generate:
@@ -70,23 +79,36 @@ if generate:
                     output = enforce_style(output)
 
             st.session_state["output"] = output
+            st.session_state["output_platform"] = platform
+            st.session_state["output_audience"] = audience
         except Exception as e:
             st.error(f"Generation failed: {e}")
 
-# --- Output ---
+# --- Main area: output, or a friendly empty state ---
 if "output" in st.session_state:
     output = st.session_state["output"]
-    limit = CHAR_LIMITS.get(platform)
-
-    st.subheader("Generated post")
-    st.text_area("Output", value=output, height=200, label_visibility="collapsed")
-    st.code(output, language=None)  # easy one-click copy via the code block
-
+    out_platform = st.session_state["output_platform"]
+    out_audience = st.session_state["output_audience"]
+    limit = CHAR_LIMITS.get(out_platform)
     char_count = len(output)
+
+    st.subheader(f"{out_platform} · {out_audience}")
+    st.code(output, language=None, wrap_lines=True)  # built-in copy icon, no separate copy button needed
+
     if limit:
-        if char_count > limit:
-            st.warning(f"{char_count} / {limit} characters, still over the limit after auto-shortening. Consider trimming the source material or regenerating.")
-        else:
-            st.caption(f"{char_count} / {limit} characters")
+        over = char_count > limit
+        pct = min(char_count / limit, 1.0)
+        st.progress(pct, text=f"{char_count} / {limit} characters")
+        if over:
+            st.warning(
+                "Still over the limit after auto-shortening. "
+                "Consider trimming the source material or regenerating."
+            )
     else:
         st.caption(f"{char_count} characters")
+else:
+    st.info(
+        "👈 Paste source material in the sidebar, pick a platform and audience, "
+        "and hit **Generate** to see a draft here."
+    )
+
