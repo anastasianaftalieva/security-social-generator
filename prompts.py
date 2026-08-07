@@ -44,8 +44,19 @@ PLATFORM_GUIDANCE = {
         "'take this seriously.'"
     ),
     "X": (
-        "Write a post for X (Twitter). Maximum 280 characters. Punchy, direct, no fluff. "
-        "One clear idea. Hashtags optional and used sparingly."
+        "Write a post for X (Twitter). Maximum 280 characters (hard limit, count carefully). "
+        "Open with a hook, the sharpest single detail or consequence, not a restatement of what "
+        "happened (never open with 'Broadcom just patched...' or similar). Do not default to "
+        "the same takeaway or call to action across audiences. 'Patch now' is a call to action "
+        "for the person who does the patching; it is the wrong takeaway for an executive who "
+        "delegates that work, and the wrong takeaway for a general reader who does not manage "
+        "infrastructure at all. Ground the takeaway in what THIS specific audience would "
+        "actually do or feel: a practitioner wants a priority signal, an executive wants a "
+        "decision to make or a question to ask their team, a general reader wants to understand "
+        "why this matters to them. End with something that invites a reply or share, a direct "
+        "question, a stance worth agreeing or disagreeing with, or an invitation for others to "
+        "weigh in, not a flat directive. Hashtags optional, used sparingly, never as a "
+        "substitute for the hook."
     ),
     "Executive summary": (
         "Write a 3-4 sentence executive summary suitable for an internal briefing doc or "
@@ -109,8 +120,9 @@ def build_shorten_prompt(draft: str, limit: int) -> str:
     return f"""The draft below is too long. Rewrite it to fit within {limit} characters total
 (count carefully, this is a hard limit). Cut sentences and phrases rather than compressing
 everything slightly, a shorter piece with fewer ideas reads better than a cramped one with all
-of them. Keep the strongest hook and the single most important fact. Do not use an em dash (—)
-anywhere.
+of them. Keep the strongest hook and the single most important fact. If the draft ends with a
+question or invitation for the reader to reply or share, keep that too, cut supporting detail
+before you cut the ending. Do not use an em dash (—) anywhere.
 
 DRAFT:
 \"\"\"
