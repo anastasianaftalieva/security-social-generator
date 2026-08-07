@@ -54,3 +54,8 @@ streamlit run app.py
 - **Prompt instructions aren't reliable for hard constraints.** Telling the model "never use an em dash" and "stay under 900 characters" wasn't enough, it violated both repeatedly. The fix was enforcing them in code: stripping em dashes with a deterministic string replace, and adding an automatic "shorten this" follow-up call when the model overshoots the character limit. Lesson: prompting sets intent, code enforces rules.
 - **Testing against real source material surfaces problems placeholder text never would.** The character limit and em-dash issues only showed up once I ran the generator against an actual breaking-news security incident, not a made-up example. Real content is messier and pushes the model toward its default habits.
 - **Verify before you publish.** Before trusting an AI-generated summary of a security incident, I checked the model's output against the original source article.
+
+## Lessons learned (Day 2)
+
+- **A shared call to action across audiences is a tell that the prompt isn't actually differentiating.** The fix was explicit: ground the takeaway in what that specific audience would do or feel (a priority signal for practitioners, a decision or question for executives, relevance for the general public), not the same instruction restated in simpler words.
+- **Constraint-heavy platforms (X's 280 characters) need explicit protection for the "soft" elements, not just the facts.** When the model has to cut for length, it defaults to trimming the ending first, exactly where the hook and the engagement question live. Adding "keep the ending, cut supporting detail first" to the shorten-prompt logic protects the part of the post most likely to drive replies.
